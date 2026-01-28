@@ -17,6 +17,8 @@ To start **both frontend and backend** locally using Docker, run this command **
 docker compose -f docker-compose.dev.yml up --build
 ```
 ---
+
+Now you can open your browser and go to http://localhost:3000/
 ## Backend Architecture Overview
 
 Even though this project clearly doesn't need it, I still used good practices and design patterns. Here are my architectural decisions:

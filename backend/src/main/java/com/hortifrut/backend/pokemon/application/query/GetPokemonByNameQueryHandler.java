@@ -1,5 +1,6 @@
 package com.hortifrut.backend.pokemon.application.query;
 
+import com.hortifrut.backend.pokemon.application.assembler.PokemonAssetUrlBuilder;
 import com.hortifrut.backend.pokemon.application.dto.PokemonDTO;
 import com.hortifrut.backend.pokemon.domain.exception.PokemonNotFoundException;
 import com.hortifrut.backend.pokemon.domain.model.Pokemon;
@@ -11,20 +12,11 @@ import org.springframework.stereotype.Component;
 @Component("GetPokemonByNameQueryHandler")
 public class GetPokemonByNameQueryHandler implements QueryHandler<GetPokemonByNameQuery, PokemonDTO> {
     private final PokemonRepositoryPort repository;
-    private String spriteUrl(int id) {
-        return "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" + id + ".png";
-    }
-    private String cryUrl(int id) {
-        return "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/legacy/" + id + ".ogg";
-    }
+    private final PokemonAssetUrlBuilder assetUrlBuilder;
 
-    private int extractIdFromUrl(String url) {
-        String trimmed = url.endsWith("/") ? url.substring(0, url.length() - 1) : url;
-        return Integer.parseInt(trimmed.substring(trimmed.lastIndexOf("/") + 1));
-    }
-
-    public GetPokemonByNameQueryHandler(PokemonRepositoryPort repository) {
+    public GetPokemonByNameQueryHandler(PokemonRepositoryPort repository, PokemonAssetUrlBuilder assetUrlBuilder) {
         this.repository = repository;
+        this.assetUrlBuilder = assetUrlBuilder;
     }
     @Override
     public PokemonDTO handle(GetPokemonByNameQuery query) {
@@ -34,8 +26,8 @@ public class GetPokemonByNameQueryHandler implements QueryHandler<GetPokemonByNa
         return new PokemonDTO(
                 pokemon.id(),
                 pokemon.name(),
-                spriteUrl(pokemon.id()),
-                cryUrl(pokemon.id()),
+                assetUrlBuilder.spriteUrl(pokemon.id()),
+                assetUrlBuilder.cryUrl(pokemon.id()),
                 pokemon.types(),
                 pokemon.stats()
                         .stream()
