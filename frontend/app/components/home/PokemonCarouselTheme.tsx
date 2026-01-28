@@ -45,7 +45,7 @@ const Theme = ({ title, description }: any) => {
           ))}
         </ul>
         <div ref={bottomRef} className="h-10" />
-        {isFetchingNextPage && <p>Loading more pokemons...</p>}
+        {isFetchingNextPage && <p className="text-center font-bold text-sm" >Loading more pokemons...</p>}
       </div>
     </section>
   );
