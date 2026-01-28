@@ -1,5 +1,3 @@
----
-
 # Full Stack App - HortiFrut Test
 
 This project contains:
@@ -34,7 +32,3 @@ Even though this project clearly doesn't need it, I still used good practices an
 - **DDD + Hexagonal** keep business rules clean and the codebase easy to evolve.  
 - **CQRS + Query Bus** make query operations explicit, type-safe, and testable.  
 - **In-memory caching** prevents repeated external API calls for the same Pokémon data or paginated lists.
-
----
-
-
