@@ -1,0 +1,37 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    container_name: pokemon-backend
+    expose:
+      - "8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: prod
+      FRONTEND_URL: https://hortifrut-frontend.alejandropch.com
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: pokemon-frontend
+    expose:
+      - "3000"
+    environment:
+      NODE_ENV: production
+      NEXT_PUBLIC_API_URL: https://hortifrut-backend.alejandropch.com
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: pokemon-proxy
+    depends_on:
+      - backend
+      - frontend
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - ./certs:/etc/letsencrypt
+    restart: unless-stopped
+
