@@ -39,7 +39,7 @@ export const PokemonCard: FC<{
       </div>
 
       <div>
-        <h3 className="mb-2.5 text-lg font-bold text-center md:text-lg">
+        <h3 className="mb-2.5 text-lg font-bold text-center md:text-lg capitalize">
           {pokemon?.name}
         </h3>
       </div>
