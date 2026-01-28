@@ -20,7 +20,6 @@ public class GetPokemonPageQueryHandler implements QueryHandler<GetPokemonPageQu
     @Override
     public PageResult<PokemonListItemDto> handle(GetPokemonPageQuery query) {
         PageResult<PokemonRef> page = repository.findPage(query.limit(), query.offset());
-
         var items = page.items()
                 .stream()
                 .map(pokemon -> {
@@ -33,7 +32,6 @@ public class GetPokemonPageQueryHandler implements QueryHandler<GetPokemonPageQu
                     );
                 })
                 .toList();
-
         return new PageResult<>(
                 items,
                 page.total()

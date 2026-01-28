@@ -33,8 +33,8 @@ public class GetPokemonByNameQueryHandler implements QueryHandler<GetPokemonByNa
                         .stream()
                         .map(stat ->
                                 new PokemonDTO.BaseStat(
-                                        stat.name(),
-                                        stat.value()
+                                    stat.name(),
+                                    stat.value()
                                 )
                         )
                         .toList()
