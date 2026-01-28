@@ -40,6 +40,7 @@ export function NextImage({
         width={width}
         height={height}
         sizes={sizes}
+	unoptimized
         priority={priority}
         loading={priority ? "eager" : "lazy"}
         onLoad={() => setIsLoaded(true)}
